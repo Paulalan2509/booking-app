@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bluebird Barbers · Booking app concept</title>
+<meta name="description" content="A concept booking and enquiry app for a fictional neighbourhood barbershop: choose a service, pick a time, get a confirmation code. Built with plain HTML, CSS and JavaScript.">
+<meta name="theme-color" content="#16314f">
+<link rel="canonical" href="https://paulalan2509.github.io/booking-app/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Bluebird Barbers · Booking app concept">
+<meta property="og:description" content="Choose a service, pick a time, get a confirmation code. A concept project with no backend.">
+<meta property="og:image" content="https://paulalan2509.github.io/booking-app/assets/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2316314f'/%3E%3Cpath d='M16 40c6-14 14-20 32-20-4 6-6 8-10 10 4 0 6 0 10-2-4 10-12 16-24 16-3 0-6-1-8-4z' fill='%23f2b04c'/%3E%3C/svg%3E">
+<link rel="preload" href="assets/fonts/bricolage-grotesque-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip" href="#book">Skip to booking</a>
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="#top" aria-label="Bluebird Barbers, home"><span class="logo" aria-hidden="true"></span>Bluebird <b>Barbers</b></a>
+    <nav aria-label="Main">
+      <a href="#services">Services</a>
+      <a href="#book">Book</a>
+      <a href="#enquiry">Enquiry</a>
+      <a href="#mine" class="mine-link">My bookings <span id="mineCount" class="count" hidden>0</span></a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow">Concept project · sample shop</p>
+      <h1>A clean cut,<br>booked in under a minute.</h1>
+      <p class="lead">Pick a service, choose a time that is really free, and get a confirmation code. No account, no phone tag.</p>
+      <div class="actions">
+        <a class="btn primary" href="#book">Book a slot</a>
+        <a class="btn ghost" href="#enquiry">Ask a question</a>
+      </div>
+      <p class="hours">Open Monday to Saturday, 10:00 to 19:00. Closed Sundays.</p>
+    </div>
+    <aside class="hero-card" aria-label="About this project">
+      <h2>About this demo</h2>
+      <p>Bluebird Barbers is a <strong>made-up shop</strong>. This is a front-end concept by Paul Alain Nyoum: bookings are saved only in your browser and nothing is sent anywhere.</p>
+      <ul class="ticks">
+        <li>Live availability, with some slots already taken</li>
+        <li>Form checks that explain every mistake</li>
+        <li>Cancel or review bookings any time</li>
+      </ul>
+    </aside>
+  </div>
+</section>
+
+<section class="section" id="services" aria-labelledby="sv">
+  <div class="wrap">
+    <h2 id="sv">Services</h2>
+    <p class="sub">Sample prices in Indian rupees.</p>
+    <ul class="svc" id="svcList"></ul>
+  </div>
+</section>
+
+<section class="section alt" id="book" aria-labelledby="bk">
+  <div class="wrap">
+    <h2 id="bk">Book your slot</h2>
+    <p class="sub">Four quick steps. You can go back and change anything before you confirm.</p>
+
+    <ol class="steps" id="steps" aria-label="Progress">
+      <li data-step="1">Service</li><li data-step="2">Date and time</li><li data-step="3">Your details</li><li data-step="4">Confirm</li>
+    </ol>
+
+    <div class="panel">
+      <div id="live" class="sr-only" role="status" aria-live="polite"></div>
+
+      <!-- step 1 -->
+      <section class="step" data-panel="1" aria-labelledby="s1">
+        <h3 id="s1" tabindex="-1">1. Choose a service</h3>
+        <fieldset class="choices" id="svcChoices"><legend class="sr-only">Service</legend></fieldset>
+        <p class="err" id="e1" role="alert"></p>
+        <div class="nav"><span></span><button class="btn primary" type="button" data-next>Next: date and time</button></div>
+      </section>
+
+      <!-- step 2 -->
+      <section class="step" data-panel="2" aria-labelledby="s2" hidden>
+        <h3 id="s2" tabindex="-1">2. Pick a date and time</h3>
+        <div class="dates" id="dates" role="radiogroup" aria-label="Date"></div>
+        <p class="slots-title" id="slotsTitle">Available times</p>
+        <div class="slots" id="slots" role="radiogroup" aria-labelledby="slotsTitle"></div>
+        <p class="hint">Crossed-out times are taken or too soon to book. These are sample slots.</p>
+        <p class="err" id="e2" role="alert"></p>
+        <div class="nav"><button class="btn ghost" type="button" data-back>Back</button><button class="btn primary" type="button" data-next>Next: your details</button></div>
+      </section>
+
+      <!-- step 3 -->
+      <section class="step" data-panel="3" aria-labelledby="s3" hidden>
+        <h3 id="s3" tabindex="-1">3. Your details</h3>
+        <form id="detailsForm" novalidate>
+          <div class="field"><label for="fName">Full name</label><input id="fName" name="name" autocomplete="name" required aria-describedby="eName"><p class="err" id="eName"></p></div>
+          <div class="field"><label for="fPhone">Mobile number <span class="opt">(10 digits)</span></label><input id="fPhone" name="phone" type="tel" inputmode="numeric" autocomplete="tel-national" required aria-describedby="ePhone hPhone"><p class="hint" id="hPhone">Sample app: use any number, it is not contacted.</p><p class="err" id="ePhone"></p></div>
+          <div class="field"><label for="fEmail">Email <span class="opt">(optional)</span></label><input id="fEmail" name="email" type="email" autocomplete="email" aria-describedby="eEmail"><p class="err" id="eEmail"></p></div>
+          <div class="field"><label for="fNote">Anything we should know? <span class="opt">(optional)</span></label><textarea id="fNote" name="note" rows="3" maxlength="200"></textarea></div>
+        </form>
+        <div class="nav"><button class="btn ghost" type="button" data-back>Back</button><button class="btn primary" type="button" data-next>Next: review</button></div>
+      </section>
+
+      <!-- step 4 -->
+      <section class="step" data-panel="4" aria-labelledby="s4" hidden>
+        <h3 id="s4" tabindex="-1">4. Check and confirm</h3>
+        <dl class="summary" id="summary"></dl>
+        <p class="hint">Free cancellation any time from My bookings. Sample shop: no payment is taken.</p>
+        <p class="err" id="e4" role="alert"></p>
+        <div class="nav"><button class="btn ghost" type="button" data-back>Back</button><button class="btn primary" type="button" id="confirmBtn">Confirm booking</button></div>
+      </section>
+
+      <!-- done -->
+      <section class="step done" data-panel="5" aria-labelledby="s5" hidden>
+        <div class="tick" aria-hidden="true">&#10003;</div>
+        <h3 id="s5" tabindex="-1">You're booked.</h3>
+        <p>Your confirmation code</p>
+        <p class="code" id="doneCode"></p>
+        <p id="doneText" class="done-text"></p>
+        <div class="nav center"><a class="btn primary" href="#mine">See my bookings</a><button class="btn ghost" type="button" id="againBtn">Book another</button></div>
+      </section>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="mine" aria-labelledby="mb">
+  <div class="wrap">
+    <h2 id="mb">My bookings</h2>
+    <p class="sub">Saved in this browser only. Clearing site data removes them.</p>
+    <ul class="mine" id="mineList"></ul>
+    <p class="empty" id="mineEmpty">No bookings yet. <a href="#book">Book your first slot.</a></p>
+  </div>
+</section>
+
+<section class="section alt" id="enquiry" aria-labelledby="eq">
+  <div class="wrap narrow">
+    <h2 id="eq">Enquiry</h2>
+    <p class="sub">Questions about services, groups or special requests.</p>
+    <form id="enqForm" class="panel" novalidate>
+      <div class="field"><label for="qName">Your name</label><input id="qName" autocomplete="name" required aria-describedby="eqName"><p class="err" id="eqName"></p></div>
+      <div class="field"><label for="qEmail">Email</label><input id="qEmail" type="email" autocomplete="email" required aria-describedby="eqEmail"><p class="err" id="eqEmail"></p></div>
+      <div class="field"><label for="qTopic">Topic</label>
+        <select id="qTopic"><option>Services and prices</option><option>Group or wedding booking</option><option>Changing a booking</option><option>Something else</option></select></div>
+      <div class="field"><label for="qMsg">Message</label><textarea id="qMsg" rows="4" required maxlength="600" aria-describedby="eqMsg"></textarea><p class="err" id="eqMsg"></p></div>
+      <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <button class="btn primary" type="submit">Send enquiry</button>
+      <p class="status" id="enqStatus" role="status"></p>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <p><strong>Bluebird Barbers</strong> is a fictional shop. Concept project by <a href="https://github.com/Paulalan2509">Paul Alain Nyoum</a>.</p>
+    <p>HTML, CSS and vanilla JavaScript. No tracking, no backend.</p>
+  </div>
+</footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="js/app.js"></script>
+</body>
+</html>
