@@ -1,6 +1,14 @@
 # Bluebird Barbers — booking and enquiry app (concept)
 
 A front-end booking app for a **fictional** neighbourhood barbershop. Visitors choose a service, pick a date and a genuinely free time, enter their details and receive a confirmation code. They can review and cancel bookings, and send an enquiry.
+**Live demo:** [paulalan2509.github.io/booking-app/](https://paulalan2509.github.io/booking-app/)
+
+![Bluebird Barbers home page](docs/01-home.jpg)
+
+| Pick a time | Confirm | Booked |
+|---|---|---|
+| ![Pick a date and time](docs/02-pick-time.jpg) | ![Review and confirm](docs/03-confirm.jpg) | ![Booking confirmed](docs/04-booked.jpg) |
+
 
 **Concept project, no backend.** Bookings and enquiries are saved only in the visitor's browser (`localStorage`). Nothing is sent anywhere, no payment is taken, and the shop, prices and "already taken" slots are sample data.
 
